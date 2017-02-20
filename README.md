@@ -9,4 +9,4 @@ I used the Adafruit HUZZAH ESP8266 as it has good tutorials for initially gettin
 
 It sounds an external 12v Alarm horn or loud buzzer as well as sends an SMS message to your phone via IFTTT  (www.ifttt.com). 
 
-#### See: ESP8266_PIR_Alarm.pdf for details!
+#### See: [ESP8266_PIR_Alarm.pdf](ESP8266_PIR_Alarm.pdf) for details!
