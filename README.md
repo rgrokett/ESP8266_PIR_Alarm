@@ -1,7 +1,7 @@
 # ESP8266_PIR_Alarm
 Motion Burglar Alarm using ESP8266 HUZZAH, PIR sensor and SMS messaging via IFTTT
 
-![alt text](https://github.com/rgroket/ESP8266_PIR_Alarm/raw/master/images/InsideAlarmBox.jpg "Inside of Alarm Box")
+![Inside of Alarm Box](images/InsideAlarmBox.jpg)
 
 ### Overview
 EEEOOO EEEOOO EEEOOO! You just triggered my motion detection burglar alarm system. But don’t worry, here’s how to build your own alarm.
