@@ -17,7 +17,7 @@
  *  
  *  The ESP8266WiFi library should include WiFiClientSecure already in it
  *
- *  version 1.0 2017-02-20 R.Grokett
+ *  version 1.1 2017-02-20 R.Grokett
  */
 
 #include <ESP8266WiFi.h>
@@ -43,14 +43,16 @@ const char* event    = "piralarm";             // Your IFTTT Event Name
 const char* SHA1Fingerprint="A9 81 E1 35 B3 7F 81 B9 87 9D 11 DD 48 55 43 2C 8F C3 EC 87";  // See SHA1 comment above 
 bool verifyCert = false; // Select true if you want SSL certificate validation
 
-int ALARM = 4;       // GPIO 4 (Alarm Buzzer)
+int ALARM = 4;         // GPIO 4 (Alarm Buzzer)
 int LED = 13;          // GPIO 13 (GREEN Activity LED)
-int PIRpin = 14;      // GPIO 14 (PIR Sensor)
-int motionState = 0;      // cache for current motion state value
-int ALARM_DELAY = 60; // Delay in seconds when activating alarm/deactivating alarm
-int MOTION_DELAY = 10; // Delay in seconds between events to keep from flooding IFTTT SMS
+int PIRpin = 14;       // GPIO 14 (PIR Sensor)
+int ALARM_DELAY = 60;  // Delay in seconds when activating alarm/deactivating alarm
+int MOTION_DELAY = 10 ;// Delay in seconds between events to keep from flooding IFTTT SMS
+int ALARM_BEEP = 5;    // Adjusts activate/deactivate sound alert (0-10)
 
-int onboardLED = 0;  // Internal ESP red LED
+
+int onboardLED = 0;    // Internal ESP red LED
+int motionState = 0;   // cache for current motion state value
 
 
 //--------------------------
