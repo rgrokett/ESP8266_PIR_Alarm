@@ -17,7 +17,7 @@
  *  
  *  The ESP8266WiFi library should include WiFiClientSecure already in it
  *
- *  version 1.1 2017-02-20 R.Grokett
+ *  version 1.1 2017-02-20 R.Grokett - Added alarm activate sound control & PIR pullup
  */
 
 #include <ESP8266WiFi.h>
@@ -48,7 +48,7 @@ int LED = 13;          // GPIO 13 (GREEN Activity LED)
 int PIRpin = 14;       // GPIO 14 (PIR Sensor)
 int ALARM_DELAY = 60;  // Delay in seconds when activating alarm/deactivating alarm
 int MOTION_DELAY = 10 ;// Delay in seconds between events to keep from flooding IFTTT SMS
-int ALARM_BEEP = 5;    // Adjusts activate/deactivate sound alert (0-10)
+int ALARM_BEEP = 3;    // Adjusts activate/deactivate sound alert intensity (0-10)
 
 
 int onboardLED = 0;    // Internal ESP red LED
@@ -63,6 +63,7 @@ void setup() {
 
   // prepare PIR input pin
   pinMode(PIRpin, INPUT);
+  digitalWrite(PIRpin, HIGH);  // turn on pullup
 
   // prepare activity LED
   pinMode(LED, OUTPUT);
@@ -97,12 +98,12 @@ void setup() {
     Serial.println("NO WIFI CONNECTION!");
   }
 
+  // Turn off Wifi to save power
+  powerSave();  
+
   // Beep the Alarm buzzer to signify its activating
   Serial.println("Activating Alarm. Leave room now!");
   activate();
-
-  // Turn off Wifi to save power
-  powerSave();  
 
   // Read PIR motion sensor initially.
   int dummy = digitalRead(PIRpin);
@@ -110,6 +111,7 @@ void setup() {
   Serial.println("Alarm now Active");
   digitalWrite(LED, HIGH);   // Alarm Active 
 
+  // Goes to Main loop()
 }
 
 
@@ -164,6 +166,10 @@ void sendEvent()
   
         Serial.println();
         Serial.println("closing connection");
+
+		// Turn off Wifi to save power
+  		powerSave();  
+
     }
     // Leave Alarm buzzer on for a while
     delay(ALARM_DELAY * 1000);
@@ -195,9 +201,9 @@ void beep() {
   Serial.println("beep()");
   blink();
   digitalWrite(ALARM, HIGH);
-  delay(100); 
+  delay(ALARM_BEEP * 100);
   digitalWrite(ALARM, LOW);
-  delay(100);
+  delay(ALARM_BEEP * 100);
 }
 
 // Beep the Alarm buzzer to signify its activated
